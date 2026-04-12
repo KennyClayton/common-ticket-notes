@@ -1,8 +1,8 @@
 # common-ticket-notes
 
-### **Copy/paste button that takes clipboard content and inserts into a template for pasting.**
+### **Copy/paste button that takes clipboard content and inserts into a template for pasting**
 
-#### _Increases efficiency by 33% -57% on this micro-task_
+#### _Increases efficiency by 33% - 57% on this micro-task_
 
 ##### Original steps (manual): 9 - 14 seconds
 
