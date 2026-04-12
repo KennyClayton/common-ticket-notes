@@ -4,7 +4,7 @@
 
 ## :rocket: _Increases efficiency by 33% - 57% on this micro-task_
 
-##### ⏲️ Original steps (manual): 🐢 9 - 14 seconds
+### ⏲️ Original steps (manual): 🐢 9 - 14 seconds
 
 1. Copy the text (triple-click is most efficient) (1 second)
 2. Navigate to note field (2 seconds)
@@ -14,7 +14,7 @@
 6. Correct formatting if the copied text adds a return or extra spaces (0 - 3 seconds)
 7. Save the note (1 second)
 
-#### 🔥 After button implementation: 🐇 6 seconds
+### 🔥 After button implementation: 🐇 6 seconds
 
 1. Copy the text (triple-click is most efficient) (1 second)
 2. Click the button (automatically inserts clipboard content into the template, formats properly, places the complete note on clipboard) (1 second)
@@ -25,7 +25,7 @@
 #### RISKS
 
 - Original method risks typos and inconsistent formatting
-- Original method takes more time (3 seconds per note, per user)
+- Original method takes more time (3 - 8 additional seconds per note, per user)
 
 #### ADVANTAGES
 
