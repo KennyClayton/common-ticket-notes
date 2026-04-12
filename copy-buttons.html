@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness Check Quick Copy</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: black;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #2b2b2b99;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 30px;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .copy-btn {
+            background:#8cff00;
+            color: rgb(0, 0, 0);
+            border: 3px inset #23ff6c;
+            border: 6px outset #94ff94;
+            padding: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(221, 234, 102, 0.4);
+            text-align: left;
+            position: relative;
+        }
+
+        .copy-btn2 {
+            background:#8cff00;
+            color: rgb(0, 0, 0);
+            border: 3px inset #23ff6c;
+            border: 6px outset #94ff94;
+            padding: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(221, 234, 102, 0.4);
+            text-align: left;
+            position: relative;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 0px 10px 10px #75ce5299;
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+.scripts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.script-btn-container {
+    perspective: 1000px;
+    height: 200px;
+}
+
+        .script-btn {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+
+        /* .script-btn.flipped {
+            transform: rotateY(180deg);
+        } */
+
+        .script-front,
+        .script-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: 3px solid #8b9eff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .script-back {
+            transform: rotateY(180deg);
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-y: auto;
+        }
+
+        .script-title {
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .btn-label {
+            display: block;
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .btn-preview {
+            display: block;
+            font-size: 12px;
+            opacity: 0.7;
+            white-space: nowrap;
+            overflow: clip;
+            text-overflow: ellipsis;
+        }
+
+        .feedback {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .feedback.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📋 Wellness Check Quick Copy Buttons</h1>
+<div class="scripts-grid"></div>
+        <!-- <div class="script-btn-container">
+            <div class="script-btn" id="scriptAnswered" onclick="flipCard('scriptAnswered')">
+                <div class="script-front">
+                    <div class="script-title">📞 Script: Customer Answered</div>
+                </div>
+                <div class="script-back">
+                    <p><strong>Script - Customer Answered</strong></p>
+                    <p>Good morning/afternoon, this is [Your Name] with IQ Fiber calling on a recorded line. Am I
+                        speaking with [Customer Name]?</p>
+                    <p>We are just doing a quick follow-up to make sure your internet installation went smoothly and to
+                        see if you had any questions.</p>
+                    <p>[Listen to customer response and address any concerns]</p>
+                    <p>Click again to flip back.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="script-btn-container">
+            <div class="script-btn" id="scriptVoicemail" onclick="flipCard('scriptVoicemail')">
+                <div class="script-front">
+                    <div class="script-title">📞 Script: Voicemail</div>
+                </div>
+                <div class="script-back">
+                    <p><strong>Script - Voicemail</strong></p>
+                    <p>Hello, this is [Your Name] with IQ Fiber. We're following up on your recent installation to
+                        ensure everything is working smoothly.</p>
+                    <p>If you have any questions or concerns, please feel free to reach out to us at [phone number] or
+                        through your customer portal.</p>
+                    <p>Thank you for being an IQ Fiber customer!</p>
+                    <p>Click again to flip back.</p>
+                </div>
+            </div>
+        </div> -->
+        <div class="buttons-grid" id="buttonsContainer"></div>
+    </div>
+
+    <div class="feedback" id="feedback">✓ Copied to clipboard!</div>
+    <div class="container">
+        <h1>Work Flow</h1>
+        <p>Wellness Check Script
+
+            Good morning/afternoon this is Kenny with IQ Fiber calling on a recorded line. Am I speaking with [Name]?
+            We are just doing a quick follow-up to make sure your internet installation went smoothly and to see if you
+            had any questions.
+        </p>
+        <div class="buttons-grid" id="buttonsContainer"></div>
+    </div>
+
+    <script>
+        // ADD YOUR TEXTS HERE - Edit the label and text for each button
+        // This is an array of button objects
+        const buttons = [
+            {
+                label: "Welcome",
+                text: `Welcome to the Fiberhood!`
+            },
+            {
+                label: "Install Wellness",
+                text: `Install Wellness`
+            },
+            {
+                label: "Internal Note",
+                text:
+                    `Install Wellness Check
+
+Account status:
+1. Account active
+2. Payment method is on file
+
+Triage:
+3. Wi- Fi Man - No
+4. Tech notes - Yes
+5. Light level - Good
+6. Error on service - No errors present
+6. Error on service - TX / RX errors present
+6. Error on service - FEC errors present
+7. Alarm History - No Alarms
+8. Wi - Fi Status: eero, Average Utilization: %
+
+Customer feedback:
+9. Customer satisfied with service.`
+            },
+            {
+                label: "External Note - Cx Answered",
+                text:
+                    `Hello,
+
+It was a pleasure speaking with you today. Thank you for sharing your feedback on the installation—we truly appreciate your input. 
+
+Please know that our team is available 24/7 should you need any assistance or support in the future. You can reach us anytime by creating a new ticket in the customer portal or by phone at 1-800-495-4775.
+
+Have you heard about our "Refer a Friend" program? Share your link and you both get rewarded when they join. To find out more, visit https://www.iqfiber.com/refer-a-friend/                        
+                        
+Thanks again for being an IQ Fiber customer! Have a wonderful day!`
+            },
+            {
+                label: "External Note - No Answer",
+                text:
+                    `Hello,
+
+Welcome to the Fiberhood! Unfortunately, it appears we were unable to reach you via phone call to hear about your installation experience with us and ensure your service is living up to our high expectations. Please know that our team is available 24/7 should you need any assistance or support.
+
+We also wanted to make you aware of our referral program called "Refer a Friend".  Share your link and you both get rewarded when they join. To find out more, visit https://www.iqfiber.com/refer-a-friend/
+
+Thanks again for being an IQ Fiber customer!
+                        
+Have a wonderful day!`
+            },
+            {
+                label: "External Note - Bad Experience",
+                text:
+                    `Hello,
+                        
+It was a pleasure speaking with you today. Thank you for sharing your feedback on the installation—we truly appreciate your input. We are disappointed to hear about those challenges with your new service, and are dedicated to addressing these concerns. 
+                    
+As the next step, a follow-up appointment with a technician has been scheduled for “X time”. We appreciate the opportunity to make this right and look forward to resolving your issue. 
+                    
+Have a wonderful day!
+`
+            },
+            {
+                label: "Service Disruption Credit",
+                text: `
+Good evening and thank you for your patience while we restored internet service to your property earlier today. We have credited your account $10 for the service disruption and apologize that we were down during that time, especially since you relied on us for your work from home. We value you as a customer and appreciate your business. Please feel free to reach out if you need anything further. 
+                `
+            },
+            {
+                label: "Pre-Call Voicemail",
+                text: `ISSUE: PRE-CALL
+ACTION: Vetro id verified / called customer. Left voicemail with installation details.
+RESOLUTION: DONE
+`
+            },
+            {
+                label: "Pre-Call Answered",
+                text: `ISSUE: PRE-CALL
+ACTION: Vetro id verified / called customer
+NEXT STEP: Spoke with Cx and advised recorded line, confirmed identity, advised service schedule date and timeframe for technician arrival window. Advised technician will call ahead, ensure someone 18 years or older present for duration of installation. Asked for any further questions; Cx advised none. 
+RESOLUTION: DONE`
+            },
+            {
+                label: "Wi-Fi Performance",
+                text: "Wi-Fi Performance"
+            },
+            {
+                label: "Hard Down Note",
+                text: `Cx called with no internet.
+PONMON hard down; no light. Sent same-day truck roll and advised Cx we will call in the morning to advise tech arrival window.
+Next steps: service call.`
+            }
+        ];
+
+        // Create buttons
+        const container = document.getElementById('buttonsContainer'); // this refers to the div above on line 222
+        buttons.forEach((btn, index) => {
+            const button = document.createElement('button');
+// if (button === buttons.findIndex(0)) {
+//     button.className = 'copy-btn2';
+// } else
+            (button.className = 'copy-btn');
+            
+            button.innerHTML = `
+                <span class="btn-label">${btn.label}</span>
+                <span class="btn-preview">${btn.text}</span>
+            `;
+            button.onclick = () => copyText(btn.text, btn.label);
+            container.appendChild(button);
+        });
+
+        function copyText(text, label) {
+            navigator.clipboard.writeText(text).then(() => {
+                const feedback = document.getElementById('feedback');
+                feedback.textContent = `✓ Copied: ${label}`;
+                feedback.classList.add('show');
+
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy text: ' + err);
+            });
+        }
+
+        // function flipCard(cardId) {
+        //     const card = document.getElementById(cardId);
+        //     card.classList.toggle('flipped');
+        // }
+
+    </script>
+</body>
+
+</html>

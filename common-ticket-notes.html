@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IQ Fiber Support Responses</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background: #00FFFF;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,0,255,0.1) 2px, rgba(255,0,255,0.1) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,0,255,0.1) 2px, rgba(255,0,255,0.1) 4px);
+            min-height: 100vh;
+            padding: 20px;
+            image-rendering: pixelated;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(180deg, #FF00FF 0%, #8B008B 100%);
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0 #000;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #00FFFF;
+            font-size: 24px;
+            text-shadow: 
+                3px 3px 0 #000,
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .header p {
+            color: #FFFF00;
+            font-size: 10px;
+            text-shadow: 2px 2px 0 #000;
+        }
+        
+        .response-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .response-card {
+            background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
+            border: 4px solid #000;
+            box-shadow: 6px 6px 0 #000;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .response-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: repeating-linear-gradient(90deg, #FFF 0px, #FFF 4px, transparent 4px, transparent 8px);
+        }
+        
+        .card-title {
+            background: #FF1493;
+            color: #FFFF00;
+            padding: 10px;
+            margin: -15px -15px 15px -15px;
+            border-bottom: 4px solid #000;
+            font-size: 12px;
+            text-shadow: 2px 2px 0 #000;
+            text-align: center;
+        }
+        
+        .card-content {
+            background: #FFF;
+            border: 3px solid #000;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            line-height: 1.6;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            color: #000;
+        }
+        
+        .card-content::-webkit-scrollbar {
+            width: 16px;
+        }
+        
+        .card-content::-webkit-scrollbar-track {
+            background: #C0C0C0;
+            border: 2px solid #000;
+        }
+        
+        .card-content::-webkit-scrollbar-thumb {
+            background: #808080;
+            border: 2px solid #000;
+        }
+        .clipboard-badge {
+            display: inline-block;
+            background: #0000FF;
+            color: #FFFF00;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 7px;
+            padding: 3px 6px;
+            border: 2px solid #000;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 0 #000;
+        }
+        
+        .copy-button {
+            width: 100%;
+            background: linear-gradient(180deg, #00FF00 0%, #008000 100%);
+            border: 4px solid #000;
+            color: #000;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 11px;
+            padding: 12px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 4px 4px 0 #000;
+            transition: all 0.1s;
+        }
+        
+        .copy-button:hover {
+            background: linear-gradient(180deg, #00FF00 0%, #00CC00 100%);
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #000;
+        }
+        
+        .copy-button:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0 0 0 #000;
+        }
+        
+        .copy-button.copied {
+            background: linear-gradient(180deg, #FFFF00 0%, #FFD700 100%);
+            animation: blink 0.5s;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(180deg, #FF00FF 0%, #8B008B 100%);
+            border: 6px solid #000;
+            box-shadow: 10px 10px 0 #000;
+            padding: 30px 40px;
+            font-size: 16px;
+            color: #00FFFF;
+            text-shadow: 3px 3px 0 #000;
+            z-index: 1000;
+            animation: popup 0.5s ease-out;
+            text-align: center;
+        }
+        
+        @keyframes popup {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .notification.show {
+            animation: popup 0.3s ease-out forwards;
+        }
+        
+        .notification.hide {
+            animation: popdown 0.3s ease-in forwards;
+        }
+        
+        @keyframes popdown {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            100% { transform: translate(-50%, -50%) scale(0); }
+        }
+        
+        .add-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(180deg, #FF1493 0%, #C71585 100%);
+            border: 4px solid #000;
+            border-radius: 0;
+            box-shadow: 6px 6px 0 #000;
+            font-size: 32px;
+            color: #FFFF00;
+            cursor: pointer;
+            transition: all 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 2px 2px 0 #000;
+        }
+        
+        .add-button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 4px 4px 0 #000;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: linear-gradient(180deg, #00FFFF 0%, #0080FF 100%);
+            border: 6px solid #000;
+            box-shadow: 10px 10px 0 #000;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .modal-title {
+            font-size: 16px;
+            color: #FF00FF;
+            text-shadow: 2px 2px 0 #000;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 10px;
+            color: #FFFF00;
+            text-shadow: 2px 2px 0 #000;
+            margin-bottom: 10px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            background: #FFF;
+            border: 3px solid #000;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .modal-button {
+            flex: 1;
+            background: linear-gradient(180deg, #00FF00 0%, #008000 100%);
+            border: 4px solid #000;
+            color: #000;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 11px;
+            padding: 12px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 #000;
+        }
+        
+        .modal-button.cancel {
+            background: linear-gradient(180deg, #FF0000 0%, #8B0000 100%);
+            color: #FFF;
+            text-shadow: 2px 2px 0 #000;
+        }
+        
+        .modal-button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #000;
+        }
+        
+        /* ============================================ */
+        /* DELETE BUTTON STYLES - 90s Pixelated Theme */
+        /* ============================================ */
+        
+        .delete-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(180deg, #FF0000 0%, #8B0000 100%);
+            border: 3px solid #000;
+            box-shadow: 3px 3px 0 #000;
+            color: #FFF;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.1s;
+            text-shadow: 2px 2px 0 #000;
+        }
+        
+        .delete-button:hover {
+            background: linear-gradient(180deg, #FF3333 0%, #CC0000 100%);
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0 #000;
+        }
+        
+        .delete-button:active {
+            transform: translate(3px, 3px);
+            box-shadow: 0 0 0 #000;
+        }
+        
+        /* ============================================ */
+        /* END DELETE BUTTON STYLES                   */
+        /* ============================================ */
+        
+        /* ============================================ */
+        /* EDIT BUTTON STYLES - 90s Pixelated Theme   */
+        /* ============================================ */
+        
+        .edit-button {
+            position: absolute;
+            top: 10px;
+            right: 50px;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
+            border: 3px solid #000;
+            box-shadow: 3px 3px 0 #000;
+            color: #000;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.1s;
+            text-shadow: 1px 1px 0 #FFF;
+        }
+        
+        .edit-button:hover {
+            background: linear-gradient(180deg, #FFE44D 0%, #FFB733 100%);
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0 #000;
+        }
+        
+        .edit-button:active {
+            transform: translate(3px, 3px);
+            box-shadow: 0 0 0 #000;
+        }
+        
+        /* ============================================ */
+        /* END EDIT BUTTON STYLES                     */
+        /* ============================================ */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>IT SUPPORT</h1>
+            <p>QUICK RESPONSE COPIER v1.2</p>
+        </div>
+        
+        <div class="response-grid" id="responseGrid"></div>
+    </div>
+    
+    <button class="add-button" onclick="openModal()">+</button>
+    
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-title" id="modalTitle">ADD NEW RESPONSE</div>
+            <form onsubmit="saveResponseForm(event)">
+                <div class="form-group">
+                    <label>TITLE:</label>
+                    <input type="text" id="titleInput" required>
+                </div>
+                <div class="form-group">
+                    <label>RESPONSE TEXT:</label>
+                                       <span class="hint">
+                        TIP: Type {{clipboard}} anywhere in your text and it will be<br>
+                        automatically replaced with whatever is on your clipboard<br>
+                        when you click COPY. Example: Work order "{{clipboard}}" is complete.
+                    </span>
+                    <textarea id="textInput" required></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="modal-button cancel" onclick="closeModal()">CANCEL</button>
+                    <button type="submit" class="modal-button">SAVE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Default responses
+        const defaultResponses = [
+            {
+                title: "Speed Test",
+                text: `Hi there,
+
+Thank you for reaching out and for taking the time to test your speeds! I completely understand wanting to make sure you're getting what you're paying for.
+
+Great news – your upload speed of 979.16 Mbps is actually excellent performance for our 1 Gig plan. Here's what's happening:
+
+With IQ Fiber's 100% fiber-optic network, we actually deliver speeds that consistently exceed 1,000 Mbps. According to our FCC Broadband Label for the 1 Gig plan, our typical speeds are 1,022.54 Mbps for both upload and download – that's over what you're paying for!
+
+The 979.16 Mbps you're seeing could be due to a few factors:
+- Testing over WiFi rather than a direct wired connection
+- The speed test server you're using
+- Network overhead from protocols and device limitations
+- Time of day or temporary network conditions
+
+To get the most accurate picture of your service, I'd be happy to send one of our technicians out to verify your speeds with a hardwired connection directly to your optical network terminal. This will show you the true capability of your fiber connection – and you'll likely see speeds right around that 1,022 Mbps mark or even higher.
+
+Would you like me to schedule a tech visit to run a hardwired speed test and ensure everything is optimized?
+
+Please let me know if you have any other questions!`
+            },
+            {
+                title: "IP Request",
+                text: `https://www.notion.so/iqfiber/Static-IP-Request-Process-Troubleshooting-32b9e8e2b824808fabfcd62e73a5fc40`
+            },
+            {
+                title: "Refer-A-Friend",
+                text: `Good evening Sarah! Did you receive your e-gift card from the refer-a-friend program?
+To learn more about how to redeem, visit our website at https://www.iqfiber.com/refer-a-friend and click on the FAQ section at the bottom.
+Let us know if you need anything at all!`
+            }
+        ];
+        
+        // Load responses from localStorage or use defaults
+        let responses = JSON.parse(localStorage.getItem('iqFiberResponses')) || defaultResponses;
+        
+        function saveResponses() {
+            localStorage.setItem('iqFiberResponses', JSON.stringify(responses));
+        }
+
+               function hasClipboardPlaceholder(text) {
+            return text.includes('{{clipboard}}');
+        }
+        
+        function renderResponses() {
+            const grid = document.getElementById('responseGrid');
+            grid.innerHTML = '';
+            
+            responses.forEach((response, index) => {
+                                const usesClipboard = hasClipboardPlaceholder(response.text);
+
+                const card = document.createElement('div');
+                card.className = 'response-card';
+                card.innerHTML = `
+                    <button class="edit-button" onclick="editResponse(${index})" title="Edit this response">✎</button>
+                    <button class="delete-button" onclick="deleteResponse(${index})" title="Delete this response">×</button>
+                    <div class="card-title">${response.title}</div>
+                    ${usesClipboard ? '<div><span class="clipboard-badge">📋 READS YOUR CLIPBOARD</span></div>' : ''}
+                    <div class="card-content">${response.text.replace(/{{clipboard}}/g, '<span style="background:#FFFF00;padding:0 3px;border:1px dashed #000;">{{clipboard}}</span>')}</div>
+                    <button class="copy-button" onclick="copyResponse(${index})">
+                        [ COPY TO CLIPBOARD ]
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+async function copyResponse(index) {
+            // Get the response text from the responses array using the index parameter
+            let text = responses[index].text;
+
+            // Check if the response template contains {{clipboard}} placeholder
+            if (hasClipboardPlaceholder(text)) {
+                // Wrap in try-catch to handle clipboard permission errors
+                try {
+                    // Ensure the window has focus before attempting clipboard access (browser requirement)
+                    if (!document.hasFocus()) {
+                        window.focus();
+                    }
+                    // Read whatever text is currently on the user's clipboard
+                    const clipboardText = await navigator.clipboard.readText();
+                    // Normalize clipboard content: remove newlines and collapse spaces
+                    const normalizedClipboard = clipboardText.replace(/\r?\n+/g, ' ').replace(/\s{2,}/g, ' ').trim();
+                    // Replace all instances of {{clipboard}} with the normalized clipboard content
+                    text = text.replace(/{{clipboard}}/g, normalizedClipboard);
+                } catch (err) {
+                    // If clipboard read fails (user denied permission or browser blocked it)
+                    showNotification('⚠ CLIPBOARD\nACCESS DENIED!\nCheck browser permissions.');
+                    console.error('Could not read clipboard:', err);
+                    // Exit the function early—don't continue copying
+                    return;
+                }
+            }
+
+            // Wrap clipboard write in try-catch to handle any copy errors
+            try {
+                // Write the final processed text to the user's clipboard
+                await navigator.clipboard.writeText(text);
+                // Show success notification
+                showNotification('COPIED!');
+                // Find all copy buttons on the page
+                const buttons = document.querySelectorAll('.copy-button');
+                // Add "copied" class to the button that was clicked to trigger animation
+                buttons[index].classList.add('copied');
+                // Remove the "copied" class after 500ms to reset the button animation
+                setTimeout(() => {
+                    buttons[index].classList.remove('copied');
+                }, 500);
+            } catch (err) {
+                // If clipboard write fails, show error notification
+                showNotification('ERROR!\nCould not copy.');
+                console.error('Could not write clipboard:', err);
+            }
+        }
+        
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification show';
+            notification.style.whiteSpace = 'pre-line';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                notification.classList.add('hide');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 1500);
+        }
+        
+        function openModal() {
+            document.getElementById('modal').classList.add('show');
+            document.getElementById('modalTitle').textContent = 'ADD NEW RESPONSE';
+            document.getElementById('titleInput').value = '';
+            document.getElementById('textInput').value = '';
+            document.getElementById('modal').dataset.editIndex = '';
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+        }
+        
+        function saveResponseForm(event) {
+            event.preventDefault();
+            const title = document.getElementById('titleInput').value;
+            const text = document.getElementById('textInput').value;
+            const editIndex = document.getElementById('modal').dataset.editIndex;
+            
+            if (editIndex !== '') {
+                // Editing existing response
+                responses[parseInt(editIndex)] = { title, text };
+                showNotification('UPDATED!');
+            } else {
+                // Adding new response
+                responses.push({ title, text });
+                showNotification('RESPONSE ADDED!');
+            }
+            
+            saveResponses();
+            renderResponses();
+            closeModal();
+        }
+        
+        /* ============================================ */
+        /* EDIT RESPONSE FUNCTION                     */
+        /* ============================================ */
+        
+        function editResponse(index) {
+            // Open modal with existing data
+            document.getElementById('modal').classList.add('show');
+            document.getElementById('modalTitle').textContent = 'EDIT RESPONSE';
+            document.getElementById('titleInput').value = responses[index].title;
+            document.getElementById('textInput').value = responses[index].text;
+            document.getElementById('modal').dataset.editIndex = index;
+        }
+        
+        /* ============================================ */
+        /* END EDIT RESPONSE FUNCTION                 */
+        /* ============================================ */
+        
+        /* ============================================ */
+        /* DELETE RESPONSE FUNCTION                   */
+        /* ============================================ */
+        
+        function deleteResponse(index) {
+            // Confirm deletion with a retro-style confirmation
+            const responseTitle = responses[index].title;
+            if (confirm(`DELETE "${responseTitle}"?\n\nThis action cannot be undone!`)) {
+                responses.splice(index, 1);
+                saveResponses();
+                renderResponses();
+                showNotification('DELETED!');
+            }
+        }
+        
+        /* ============================================ */
+        /* END DELETE RESPONSE FUNCTION               */
+        /* ============================================ */
+        
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') {
+                closeModal();
+            }
+        });
+        
+        // Initial render
+        renderResponses();
+    </script>
+</body>
+</html>

@@ -1,0 +1,740 @@
+<div class="container">
+    <div class="logo">
+        <img src="https://www.iqfiber.com/wp-content/uploads/cropped-iq-fiber-a-smarter-internet-choice.png.webp">
+        <!-- <html lang="en"> -->
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Call Notes Build</title>
+            <style>
+                body {
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                    margin: 0;
+                    padding: 20px;
+                    background: rgb(243, 189, 71);
+                    min-height: 100vh;
+                }
+
+                .container {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    background: rgb(70, 70, 70);
+                    padding: 30px;
+                    border-radius: 20px;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+                }
+
+                .container2 {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    background: rgb(35, 31, 32);
+                    padding: 30px;
+                    border-radius: 20px;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+                }
+
+                .logo {
+                    text-align: center;
+                    margin-bottom: 40px;
+                }
+
+                .logo img {
+                    max-width: 300px;
+                    height: auto;
+                }
+
+                h1 {
+                    color: rgb(243, 189, 71);
+                    margin-bottom: 10px;
+                    font-size: 28px;
+                    text-align: center;
+                }
+
+                .company-name {
+                    color: rgb(243, 189, 71);
+                    font-size: 24px;
+                    font-weight: 700;
+                    text-align: center;
+                    margin-bottom: 5px;
+                    letter-spacing: 2px;
+                }
+
+                .section {
+                    margin-bottom: 30px;
+                }
+
+                .section-title {
+                    color: rgb(243, 189, 71);
+                    font-size: 18px;
+                    font-weight: 700;
+                    margin-bottom: 15px;
+                    padding-bottom: 8px;
+                    border-bottom: 2px solid rgb(243, 189, 71);
+                    text-align: left;
+                }
+
+                .buttons-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                    gap: 12px;
+                    margin-bottom: 20px;
+                }
+
+                .phrase-btn {
+                    background: rgb(70, 70, 70);
+                    color: white;
+                    border: 3px solid rgb(243, 189, 71);
+                    padding: 15px;
+                    font-size: 10px;
+                    /* font-weight: 20; */
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    box-shadow:
+                        0 6px 0 rgba(243, 189, 71, 0.4),
+                        /* inset 0 2px 5px rgba(255,255,255,0.1), */
+                        inset 0 -2px 5px rgba(0, 0, 0, 0.3);
+                    text-align: left;
+                    position: relative;
+                    /* Add this */
+                    overflow: hidden;
+                    /* Add this */
+                }
+
+                .phrase-btn::before {
+                    content: '';
+                    position: absolute;
+                    top: 1.4;
+                    left: 0;
+                    right: 0;
+                    height: 15%;
+                    /* Covers top half only */
+                    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+                    border-radius: 10px 10px 0 0;
+                    /* Match button's top corners */
+                    pointer-events: none;
+                    /* Allows clicks to pass through */
+                }
+
+                .phrase-btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow:
+                        0 8px 0 rgba(243, 189, 71, 0.4),
+                        inset 0 2px 5px rgba(255, 255, 255, 0.1),
+                        inset 0 -2px 5px rgba(0, 0, 0, 0.3);
+                }
+
+                .phrase-btn:active {
+                    transform: translateY(3px);
+                    box-shadow:
+                        0 3px 0 rgba(243, 189, 71, 0.4),
+                        inset 0 2px 5px rgba(255, 255, 255, 0.1),
+                        inset 0 -2px 5px rgba(0, 0, 0, 0.3);
+                }
+
+                .phrase-btn.selected {
+                    background: rgb(243, 189, 71);
+                    color: rgb(35, 31, 32);
+                    border-color: rgb(243, 189, 71);
+                    box-shadow:
+                        0 6px 6 2 rgba(243, 189, 71, 0.6),
+                        inset 0 2px 5px rgba(255, 255, 255, 0.3),
+                        /* inset 0 -2px 5px rgba(0,0,0,0.1); */
+
+                }
+
+                /* Eero buttons - blue glow at bottom */
+                .phrase-btn.eero::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 3px;
+                    background: rgb(0, 149, 255);
+                    box-shadow: 0 0 10px rgba(0, 149, 255, 0.8), 0 0 20px rgba(0, 149, 255, 0.4);
+                    border-radius: 0 0 7px 7px;
+                    pointer-events: none;
+                }
+
+                /* Calix buttons - orange glow at bottom */
+                .phrase-btn.calix::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 3px;
+                    background: rgb(255, 120, 0);
+                    box-shadow: 0 0 10px rgba(255, 120, 0, 0.8), 0 0 20px rgba(255, 120, 0, 0.4);
+                    border-radius: 0 0 7px 7px;
+                    pointer-events: none;
+                }
+
+                /* Traveling spark animation */
+                @keyframes travelingSpark {
+                    0% {
+                        left: -10%;
+                        opacity: 0;
+                    }
+
+                    10% {
+                        opacity: 1;
+                    }
+
+                    90% {
+                        opacity: 1;
+                    }
+
+                    100% {
+                        left: 110%;
+                        opacity: 0;
+                    }
+                }
+
+                /* Eero buttons - blue traveling spark */
+                .phrase-btn.eero::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 3px;
+                    background: rgb(0, 149, 255);
+                    box-shadow: 0 0 10px rgba(0, 149, 255, 0.8), 0 0 20px rgba(0, 149, 255, 0.4);
+                    border-radius: 0 0 7px 7px;
+                    pointer-events: none;
+                }
+
+                .phrase-btn.eero::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: -10%;
+                    width: 8px;
+                    height: 3px;
+                    background: rgb(255, 255, 255);
+                    box-shadow: 0 0 10px rgb(0, 149, 255), 0 0 20px rgb(0, 200, 255);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    opacity: 0;
+                    z-index: 2;
+                }
+
+                .phrase-btn.eero:hover::before {
+                    animation: travelingSpark 1.2s ease-in-out infinite;
+                }
+
+                /* Calix buttons - orange traveling spark */
+                .phrase-btn.calix::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 3px;
+                    background: rgb(255, 120, 0);
+                    box-shadow: 0 0 10px rgba(255, 120, 0, 0.8), 0 0 20px rgba(255, 120, 0, 0.4);
+                    border-radius: 0 0 7px 7px;
+                    pointer-events: none;
+                }
+
+                .phrase-btn.calix::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: -10%;
+                    width: 8px;
+                    height: 3px;
+                    background: rgb(255, 255, 255);
+                    box-shadow: 0 0 10px rgb(255, 120, 0), 0 0 20px rgb(255, 200, 0);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    opacity: 0;
+                    z-index: 2;
+                }
+
+                .phrase-btn.calix:hover::before {
+                    animation: travelingSpark 1.2s ease-in-out infinite;
+                }
+
+                .preview-box {
+                    background: rgb(50, 50, 50);
+                    border: 2px solid rgb(243, 189, 71);
+                    border-radius: 10px;
+                    padding: 20px;
+                    min-height: 120px;
+                    margin-bottom: 20px;
+                }
+
+                .preview-title {
+                    color: rgb(243, 189, 71);
+                    font-size: 14px;
+                    font-weight: 700;
+                    margin-bottom: 10px;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+
+                .preview-text {
+                    color: white;
+                    line-height: 1.8;
+                    font-size: 15px;
+                }
+
+                .preview-empty {
+                    color: rgb(150, 150, 150);
+                    font-style: italic;
+                }
+
+                .action-buttons {
+                    display: flex;
+                    gap: 15px;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                }
+
+                .action-btn {
+                    padding: 15px 30px;
+                    font-size: 16px;
+                    font-weight: 700;
+                    border-radius: 10px;
+                    border: none;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                }
+
+                .complete-btn {
+                    background: rgb(243, 189, 71);
+                    color: rgb(35, 31, 32);
+                    box-shadow: 0 4px 0 rgba(35, 31, 32, 0.3);
+                }
+
+                .complete-btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 0 rgba(35, 31, 32, 0.3);
+                }
+
+                .complete-btn:active {
+                    transform: translateY(2px);
+                    box-shadow: 0 2px 0 rgba(35, 31, 32, 0.3);
+                }
+
+                .clear-btn {
+                    background: rgb(70, 70, 70);
+                    color: white;
+                    box-shadow: 0 4px 0 rgba(50, 50, 50, 0.8);
+                    border: 2px solid rgb(243, 189, 71);
+                }
+
+                .clear-btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 0 rgba(50, 50, 50, 0.8);
+                }
+
+                .clear-btn:active {
+                    transform: translateY(2px);
+                    box-shadow: 0 2px 0 rgba(50, 50, 50, 0.8);
+                }
+
+                .feedback {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: rgb(243, 189, 71);
+                    color: rgb(35, 31, 32);
+                    padding: 15px 25px;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    box-shadow: 0 4px 12px rgba(35, 31, 32, 0.3);
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                    z-index: 1000;
+                }
+
+                .feedback.show {
+                    opacity: 1;
+                }
+
+                .input-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                    gap: 12px;
+                    margin-bottom: 20px;
+                }
+
+                .input-group {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .input-group label {
+                    color: rgb(243, 189, 71);
+                    font-size: 12px;
+                    font-weight: 600;
+                    margin-bottom: 5px;
+                }
+
+                .input-group input {
+                    background: rgb(50, 50, 50);
+                    border: 2px solid rgb(243, 189, 71);
+                    border-radius: 8px;
+                    padding: 10px;
+                    color: white;
+                    font-size: 13px;
+                }
+
+                .input-group select {
+                    background: rgb(50, 50, 50);
+                    border: 2px solid rgb(243, 189, 71);
+                    border-radius: 8px;
+                    padding: 10px;
+                    color: white;
+                    font-size: 13px;
+                    cursor: pointer;
+                }
+
+                .input-group select:focus {
+                    outline: none;
+                    border-color: rgb(243, 189, 71);
+                    box-shadow: 0 0 10px rgba(243, 189, 71, 0.3);
+                }
+
+                .input-group select option {
+                    background: rgb(50, 50, 50);
+                    color: white;
+                }
+
+                .input-group input::placeholder {
+                    color: rgb(150, 150, 150);
+                }
+
+                .input-group input:focus {
+                    outline: none;
+                    border-color: rgb(243, 189, 71);
+                    box-shadow: 0 0 10px rgba(243, 189, 71, 0.3);
+                }
+            </style>
+        </head>
+
+        <body>
+            <div class="container2">
+                <!-- <div class="company-name">IQ FIBER</div> -->
+                <h1>📞 Call Notes Builder</h1>
+
+                <div class="section">
+                    <div class="section-title">48-hr Cancellation Note</div>
+                    <div> testing text on a div with no class assigned</div>
+                    <div class="section-title"> testing text on a div WITH a class assigned</div>
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="cancelAddress">Address:</label>
+                            <input type="text" id="cancelAddress" placeholder="Paste service address">
+                        </div>
+                        <div class="input-group">
+                            <label for="serviceType">Service Type:</label>
+                            <select id="serviceType">
+                                <option value="">Select...</option>
+                                <option value="Install">Install</option>
+                                <option value="Truck Roll">Truck Roll</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="cancelAction">Action:</label>
+                            <select id="cancelAction" onchange="toggleToDate()">
+                                <option value="">Select...</option>
+                                <option value="Cancelled">Cancelled</option>
+                                <option value="Rescheduled">Rescheduled</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="fromDate">From Date:</label>
+                            <input type="date" id="fromDate">
+                        </div>
+                        <div class="input-group" id="toDateGroup">
+                            <label for="toDate">To Date:</label>
+                            <input type="date" id="toDate">
+                        </div>
+                        <div class="input-group">
+                            <label for="cancelReason">Reason:</label>
+                            <input type="text" id="cancelReason" placeholder="Enter reason">
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button class="action-btn complete-btn" onclick="copyCancellationNote()">📋 Copy Cancellation
+                            Note</button>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Gaiia Common Notes</div>
+                    <div class="buttons-grid" id="gaiiaCommonSection"></div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Customer Issue</div>
+                    <div class="buttons-grid" id="issuesSection"></div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Network Setup</div>
+                    <div class="buttons-grid" id="setupSection"></div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Symptoms</div>
+                    <div class="buttons-grid" id="symptomsSection"></div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Troubleshooting Steps</div>
+                    <div class="buttons-grid" id="troubleshootingSection"></div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Resolution</div>
+                    <div class="buttons-grid" id="resolutionSection"></div>
+                </div>
+
+                <div class="preview-box">
+                    <div class="preview-title">Preview</div>
+                    <div class="preview-text" id="previewText">
+                        <span class="preview-empty">Click buttons above to build your notes...</span>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn complete-btn" onclick="completeParagraph()">📋 Complete & Copy</button>
+                    <button class="action-btn clear-btn" onclick="clearAll()">🗑️ Clear All</button>
+                </div>
+            </div>
+
+            <div class="feedback" id="feedback">✓ Copied to clipboard!</div>
+
+            <script>
+                // Define your phrases here
+                const phrases = {
+                    cancel: [
+                        `Rescheduled 
+Address : 
+Tech Assigned : 
+Time : 
+Date :
+`
+                    ],
+                    gaiiaCommon: [
+                        `Cx called to upgrade to 2Gbps plan at $95; confirmed with Supervisors that we are capable; ran speed mod workflow and confirmed completed. Called Cx and verified speed`
+                    ],
+                    issues: [
+                        "ISSUE: Customer reports slow internet speeds",
+                        "ISSUE: Customer reports Wi-Fi dead spot",
+                        "ISSUE: Customer reports internet connection issues",
+                        "ISSUE: Customer reports TV not working",
+                        "ISSUE: Customer reports streaming device not working as expected",
+                        "ISSUE: Customer reports TV pixelating or freezing"
+                    ],
+                    setup: [
+                        "Setup: ONT > hardwired to",
+                        "Eero Router > wireless to", 
+                        "Eero Router > hardwired to",
+                        "Eero Mesh > hardwired to",
+                        "Eero Mesh > wireless to",
+                        "Calix Router > hardwired to",
+                        "Calix Router > wireless to",
+                        "Calix Mesh > hardwired to",
+                        "Calix Mesh > wireless to",
+                        "Customer device XYZ"
+                    ],
+
+                    symptoms: [
+                        "Symptoms: ",
+                        "RG light is red",
+                        "Slow internet speeds",
+                        "TV is buffering",
+                        "TV apps not loading",
+                        "TV pixelating or freezing",
+                        "Someone cut the line in the yard"
+                    ],
+                    troubleshooting: [
+                        `
+ACTION: `,
+                        "PONMON good. No errors of any kind. Alarm history is clear. ",
+                        "Router good; no issues; strong connection to all devices on the network",
+                        "Issue is only on the one device",
+                        "Directed customer to restart the problem device",
+                        "Directed customer to unplug device, wait 30 seconds, and plug back in",
+                        "Ran speed test on problem device. Confirmed adequate speeds. Speeds were XXXXXX",
+                        "Verified all cable connections are secure",
+                        "Ran software/firmware updates",
+                        "Reset router remotely",
+                        "Confirmed devices on the network have strong signal",
+                        "Walked customer through manual reboot of equipment",
+                        "Verified account is active and in good standing",
+                        "Assigned technician for Wi-Fi scan and possible addition of equipment"
+                    ],
+                    resolution: [
+                        `NEXT STEPS: Service call`,
+                        "Scheduled technician visit for further diagnosis",
+                        "Issue resolved after power cycle",
+                        "Escalated to Level 2 support",
+                        "Customer will monitor and call back if issue persists",
+                        "Replaced faulty equipment - new equipment working properly"
+                    ]
+                };
+
+                let selectedPhrases = [];
+
+                // Build the buttons
+                function createButtons(sectionId, phrasesArray) {
+                    const container = document.getElementById(sectionId);
+                    phrasesArray.forEach((phrase, index) => {
+                        const button = document.createElement('button');
+                        button.className = 'phrase-btn';
+
+                        // Add manufacturer-specific classes for Network Setup section
+                        if (sectionId === 'setupSection') {
+                            if (phrase.toLowerCase().includes('eero')) {
+                                button.classList.add('eero');
+                            } else if (phrase.toLowerCase().includes('calix')) {
+                                button.classList.add('calix');
+                            }
+                        }
+
+                        button.textContent = phrase;
+                        button.onclick = () => togglePhrase(phrase, button);
+                        container.appendChild(button);
+                    });
+                }
+
+                function togglePhrase(phrase, button) {
+                    const index = selectedPhrases.indexOf(phrase);
+                    if (index > -1) {
+                        selectedPhrases.splice(index, 1);
+                        button.classList.remove('selected');
+                    } else {
+                        selectedPhrases.push(phrase);
+                        button.classList.add('selected');
+                    }
+                    updatePreview();
+                }
+
+                function updatePreview() {
+                    const previewText = document.getElementById('previewText');
+
+                    let preview = '';
+
+                    // Add selected phrases
+                    if (selectedPhrases.length > 0) {
+                        preview = selectedPhrases.join('. ') + '.';
+                    }
+
+                    if (preview === '') {
+                        previewText.innerHTML = '<span class="preview-empty">Click buttons above to build your notes...</span>';
+                    } else {
+                        previewText.textContent = preview;
+                    }
+                }
+
+                function completeParagraph() {
+                    let paragraph = '';
+
+                    // Add selected phrases
+                    if (selectedPhrases.length > 0) {
+                        paragraph = selectedPhrases.join('. ') + '.';
+                    }
+
+                    if (paragraph === '') {
+                        alert('Please select at least one phrase before completing');
+                        return;
+                    }
+
+                    navigator.clipboard.writeText(paragraph).then(() => {
+                        const feedback = document.getElementById('feedback');
+                        feedback.textContent = '✓ Copied to clipboard!';
+                        feedback.classList.add('show');
+                        setTimeout(() => {
+                            feedback.classList.remove('show');
+                        }, 2000);
+                    }).catch(err => {
+                        alert('Failed to copy: ' + err);
+                    });
+                }
+
+                function toggleToDate() {
+                    const action = document.getElementById('cancelAction').value;
+                    const toDateGroup = document.getElementById('toDateGroup');
+
+                    if (action === 'Cancelled') {
+                        toDateGroup.style.display = 'none';
+                        document.getElementById('toDate').value = '';
+                    } else {
+                        toDateGroup.style.display = 'flex';
+                    }
+                }
+
+                function copyCancellationNote() {
+                    const address = document.getElementById('cancelAddress').value;
+                    const serviceType = document.getElementById('serviceType').value;
+                    const action = document.getElementById('cancelAction').value;
+                    const fromDate = document.getElementById('fromDate').value;
+                    const toDate = document.getElementById('toDate').value;
+                    const reason = document.getElementById('cancelReason').value;
+
+                    if (!address || !serviceType || !action || !fromDate || !reason) {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+
+                    if (action === 'Rescheduled' && !toDate) {
+                        alert('Please select a "To Date" for rescheduled appointments');
+                        return;
+                    }
+
+                    let note = `${address} - ${action} ${serviceType} from ${fromDate}`;
+
+                    if (action === 'Rescheduled') {
+                        note += ` to ${toDate}`;
+                    }
+
+                    note += `. Reason: ${reason}`;
+
+                    navigator.clipboard.writeText(note).then(() => {
+                        const feedback = document.getElementById('feedback');
+                        feedback.textContent = '✓ Cancellation note copied!';
+                        feedback.classList.add('show');
+                        setTimeout(() => {
+                            feedback.classList.remove('show');
+                        }, 2000);
+                    }).catch(err => {
+                        alert('Failed to copy: ' + err);
+                    });
+                }
+
+                function clearAll() {
+                    selectedPhrases = [];
+                    document.querySelectorAll('.phrase-btn').forEach(btn => {
+                        btn.classList.remove('selected');
+                    });
+                    updatePreview();
+                }
+
+                // Initialize
+                // in order to create a button, 
+                createButtons('gaiiaCommonSection', phrases.gaiiaCommon);
+                createButtons('issuesSection', phrases.issues);
+                createButtons('setupSection', phrases.setup);
+                createButtons('symptomsSection', phrases.symptoms);
+                createButtons('troubleshootingSection', phrases.troubleshooting);
+                createButtons('resolutionSection', phrases.resolution);
+
+                // Update preview when user types
+                document.getElementById('cancel').addEventListener('input', updatePreview);
+                document.getElementById('address').addEventListener('input', updatePreview);
+                document.getElementById('techAssigned').addEventListener('input', updatePreview);
+                document.getElementById('time').addEventListener('input', updatePreview);
+                document.getElementById('date').addEventListener('input', updatePreview);
+            </script>
+        </body>
+
+        </html>
