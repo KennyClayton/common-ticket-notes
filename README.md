@@ -1,8 +1,15 @@
 # common-ticket-notes
 
+## Table of Contents
+- [📙 Read about it](#read-about-it)
+- [🔧 Try it out!](#try-it-out)
+
+
+## Read about it
 **Copy/paste button that takes clipboard content and inserts into a template for pasting**
 
 ## :rocket: _Increases efficiency by 33% - 57% on this micro-task_
+
 
 ### ⏲️ Original steps (manual): 🐢 9 - 14 seconds
 
@@ -22,12 +29,12 @@
 4. Ctrl + V to paste (1 second)
 5. Save the note (1 second)
 
-#### RISKS
+### ⚠️ *Risks*
 
 - Original method risks typos and inconsistent formatting
 - Original method takes more time (3 - 8 additional seconds per note, per user)
 
-#### ADVANTAGES
+### 📈 *Advantages*
 
 - The button eliminates the need to navigate the cursor
 - The button formats the text, eliminating extra spaced and placing a second line per formatting preferences
@@ -35,3 +42,7 @@
 
 **_DISCLAIMER:_**
 _This assumes the button is open and readily available without navigating to different screens, or implemented as a broswer extension._
+
+## Try it out!
+Download the standalone HTML file here and open it locally in your browser.
+``
