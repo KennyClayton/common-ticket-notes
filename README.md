@@ -55,6 +55,7 @@ _This assumes the button is open and readily available without navigating to dif
 - Copy some text
 - Click the button <img width="199" height="32" alt="images common-ticket-notes3" src="https://github.com/user-attachments/assets/cc4420f7-4cea-4344-9c2b-5d1546e5eed4" />
 - Paste anywhere
-- The text you copied to the clipboard initially gets formatted proerly into the template defined in the button
-- Try adding a new custom button by clicking on the plus botton in the bottom right, or edit existing buttons. (And yes, these are stored locally in the broswer, so clearing cache loses any new data)
+- The text you copied to the clipboard initially gets formatted properly into the template defined in the button
+- Try adding a new custom button by clicking on the plus button <img src="https://github.com/user-attachments/assets/8b042518-8fde-4f16-b8e2-b91495ff574e" width="47" height="44" alt="Plus button" style="vertical-align: middle;"/>
+in the bottom right, or edit existing buttons. (And yes, these are stored locally in the broswer, so clearing cache loses any new data)
 
