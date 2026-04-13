@@ -46,6 +46,8 @@
 
 - The button eliminates the need to navigate the cursor into an exact position
 - The button formats the text, eliminating extra spaces and returns, and places a second line for the closing remarks, per formatting preferences
+- The button definitively eliminates any future errors (typos or formatting) on this microtask and provides uniformity in documentation
+
 
 **_DISCLAIMER:_**
 _This assumes the button is open and readily available without navigating to different screens, perhaps implemented as a broswer extension._
